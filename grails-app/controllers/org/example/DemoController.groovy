@@ -3,6 +3,7 @@ package org.example
 import grails.converters.JSON
 import groovy.json.JsonGenerator
 import groovy.json.JsonOutput
+import org.springframework.transaction.annotation.Transactional
 
 class DemoController {
     // index() method will be invoked if you invoke /demo
@@ -15,11 +16,9 @@ class DemoController {
      */
    // static defaultAction = "index"
     def index() {
-        List<Number> list = [1,2]
-        def map = [:]
-        map.put("key" , "value")
-        JsonGenerator generator = new JsonGenerator.Options().build(); // you can pass here additional options, that will determine how different data types should be parsed into json, for example date format.
-        //JsonOutput.toJson()
-        render generator.toJson(map);
+        def nose = new Nose()
+        def face = new Face(nose: nose)
+
+        render nose.face?.toString()
     }
 }
